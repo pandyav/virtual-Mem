@@ -21,7 +21,9 @@ If you dont want to run it manually through an IDE, easier way is through the co
 open cmd and browse to the bin folder. type the following command: java MemoryDriver. Make sure the program is compiled or built before doing this. For building through cmd, go to the src folder, type the following command: javac -d ../bin *.java
 
 *command java is for running a compiled java program
+
 *command javac is for compiling a java program
+
 *MemoryDriver is the class with main function
 
 How the application works?
