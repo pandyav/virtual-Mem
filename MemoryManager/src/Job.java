@@ -1,3 +1,10 @@
+/**
+ * @author Vaibhav
+ * 
+ * Job object class
+ *
+ */
+
 public class Job {
 
 	private String JobName;

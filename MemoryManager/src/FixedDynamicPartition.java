@@ -2,18 +2,35 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Queue;
 
-public class FixedPartition {
+/*
+ * Applies Fixed-first, Fixed-best, Dynamic-First, Dynamic-best algorithms
+ * 
+ * Takes in Jobs to allocate them
+ * 
+ * If no partition available, job will go into waiting queue
+ * 
+ * Finally jobs will be deallocated for next jobs waiting
+ */
 
-	LinkedList<Partition> l;
-	Queue<Job> j;
+/**
+ * @author Vaibhav
+ *
+ */
 
-	Queue<Job> waiting = new LinkedList<Job>();
+public class FixedDynamicPartition {
 
-	Queue<Job> finish = new LinkedList<Job>();
+	LinkedList<Partition> l;//main memory	
+	Queue<Job> j;//job queue
+
+	Queue<Job> waiting = new LinkedList<Job>();//waiting queue
+
+	Queue<Job> finish = new LinkedList<Job>();//queue for deallocated job statuses
 
 	String o1,o2;
 
-	public FixedPartition(LinkedList<Partition> l, Queue<Job> j,String o1, String o2) {
+	
+
+	public FixedDynamicPartition(LinkedList<Partition> l, Queue<Job> j,String o1, String o2) {
 		this.l = l;
 		this.j = j;
 		this.o1=o1;
@@ -21,6 +38,7 @@ public class FixedPartition {
 
 	}
 
+	//are all partitions busy?
 	private boolean areAllBusy()
 	{
 		ListIterator<Partition> lt2 = l.listIterator();
@@ -32,6 +50,7 @@ public class FixedPartition {
 		return false;
 	}
 
+	//deallocate jobs for next jobs waiting
 	public void finish()
 	{
 
@@ -61,9 +80,9 @@ public class FixedPartition {
 				if(!j.isEmpty())
 				{
 					if(o1.equals("fixed")&&o2.equals("first"))
-						ApplyFixed();
+						ApplyFixedFirst();
 					else if(o1.equals("fixed")&&o2.equals("best"))
-						ApplyBestFit();
+						ApplyFixedBestFit();
 					else if(o1.equals("dynamic")&&o2.equals("first"))
 						ApplyDynamicFirstFit();
 					else if(o1.equals("dynamic")&&o2.equals("best"))
@@ -78,7 +97,8 @@ public class FixedPartition {
 			System.out.println(finish.peek().getJobName() +" - "+finish.remove().getStatus());
 	}
 
-	public void ApplyFixed() {
+	//Fixed-first algorithm
+	public void ApplyFixedFirst() {
 		int counter;
 		System.out.println("Applying First-Fit to Fixed Partition.....");
 		do {
@@ -120,7 +140,8 @@ public class FixedPartition {
 
 	}
 
-	public void ApplyBestFit() {
+	//apply Fixed-best
+	public void ApplyFixedBestFit() {
 		int memory_block = 300;
 		int initial_Mem_waste;
 		int memoryWaste;
@@ -177,6 +198,7 @@ public class FixedPartition {
 
 	}
 
+	//apply Dynamic-first
 	public void ApplyDynamicFirstFit() {
 
 		int counter;
@@ -220,6 +242,7 @@ public class FixedPartition {
 
 	}
 
+	//apply dynamic best
 	public void ApplyDynamicBestFit() {
 		int memory_block = 300;
 		int initial_Mem_waste;
@@ -275,6 +298,7 @@ public class FixedPartition {
 
 	}
 
+	//get the index of the largest partition
 	private int getLargestPartIndex() {
 		ListIterator<Partition> lt2 = l.listIterator();
 		int index = 1;
@@ -292,6 +316,7 @@ public class FixedPartition {
 		return index2;
 	}
 
+	//draw out the main memory
 	public void drawMemory() {
 
 		ListIterator<Partition> lt2 = l.listIterator();
@@ -303,6 +328,7 @@ public class FixedPartition {
 
 	}
 
+	//draw the waiting queue
 	public void drawWaiting() {
 		System.out.println("Waiting Queue\n------------------------");
 		for (Job j : waiting)

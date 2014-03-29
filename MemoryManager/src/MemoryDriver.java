@@ -2,6 +2,16 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+/**
+ * @author Vaibhav
+ * 
+ * The main driver class to test the program
+ * 
+ * Memory default to size 200k for tesing purpose
+ * 
+ * Partition default to 4 and fixed size
+ *
+ */
 public class MemoryDriver {
 
 	public static void main(String[] args) {
@@ -15,7 +25,7 @@ public class MemoryDriver {
 		int numJobs = 1;
 		String option;
 
-		FixedPartition fp;
+		FixedDynamicPartition fp;
 
 		memory.add(new Partition(100, 1));
 		memory.add(new Partition(25, 2));
@@ -27,7 +37,7 @@ public class MemoryDriver {
 			String option3 = sc.next();
 			System.out.println("first or best");
 			String option2 = sc.next();
-			fp = new FixedPartition(memory, jobs,option3,option2);
+			fp = new FixedDynamicPartition(memory, jobs,option3,option2);
 			do {
 				System.out.println("Which option? (help=Help Menu)");
 				option = sc.next();
@@ -37,11 +47,11 @@ public class MemoryDriver {
 					addJobs(numJobs, sc, jobs);
 
 					if (option2.equals("first") && option3.equals("fixed")) {
-						fp.ApplyFixed();
+						fp.ApplyFixedFirst();
 
 					} else if (option2.equals("best")
 							&& option3.equals("fixed"))
-						fp.ApplyBestFit();
+						fp.ApplyFixedBestFit();
 					else if (option2.equals("first")
 							&& option3.equals("dynamic"))
 						fp.ApplyDynamicFirstFit();

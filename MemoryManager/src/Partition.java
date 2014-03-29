@@ -1,6 +1,13 @@
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+/**
+ * @author Vaibhav
+ * 
+ * Partition Object class
+ *
+ */
+
 public class Partition {
 
 	private int partitionSize;
